@@ -22,7 +22,7 @@ function App() {
                     return (
                         <Guitar
                             key={guitar.id}
-                            price={guitar.price}
+                            guitar={guitar}
                         />
                     )
                 })}
