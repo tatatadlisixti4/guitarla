@@ -4,6 +4,9 @@ function Header({cart}) {
     // State Derivado
     const isEmpty = () => cart.length === 0;
 
+    const cartTotal = () => {
+        return cart.reduce( (total, item) => total + (item.price * item.quantity), 0)
+    }
     return (
         <header className="py-5 header">
             <div className="container-xl">
@@ -21,8 +24,9 @@ function Header({cart}) {
                                 {isEmpty() ?(
                                     <p className="text-center">El carrito esta vacio</p>
                                 ) : (
-                                    <table className="w-100 table">
-                                        <thead>
+                                    <>
+                                        <table className="w-100 table">
+                                            <thead>
                                             <tr>
                                                 <th>Imagen</th>
                                                 <th>Nombre</th>
@@ -30,9 +34,9 @@ function Header({cart}) {
                                                 <th>Cantidad</th>
                                                 <th></th>
                                             </tr>
-                                        </thead>
-                                        <tbody>
-                                            {cart.map( guitar => (
+                                            </thead>
+                                            <tbody>
+                                            {cart.map(guitar => (
                                                 <tr key={guitar.id}>
                                                     <td>
                                                         <img className="img-fluid" src={`/img/${guitar.image}.jpg`} alt="imagen guitarra"/>
@@ -64,10 +68,12 @@ function Header({cart}) {
                                                     </td>
                                                 </tr>
                                             ))}
-                                        </tbody>
-                                    </table>
+                                            </tbody>
+                                        </table>
+                                        <p className="text-end">Total pagar: <span className="fw-bold">${cartTotal()}</span></p>
+                                    </>
                                 )}
-                                <p className="text-end">Total pagar: <span className="fw-bold">$899</span></p>
+
                                 <button className="btn btn-dark w-100 mt-3 p-2">Vaciar Carrito</button>
                             </div>
                         </div>
