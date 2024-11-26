@@ -22,6 +22,10 @@ function App() {
         }
     }
 
+    function removeFromCart(id) {
+        setCart( prevCart => prevCart.filter( guitar => guitar.id !== id ) );
+    }
+
     useEffect(() => {
         setData(db)
     }, [])
@@ -30,6 +34,7 @@ function App() {
     <>
         <Header
             cart={cart}
+            removeFromCart={removeFromCart}
         />
         <main className="container-xl mt-5">
             <h2 className="text-center">Nuestra Colección</h2>
@@ -40,7 +45,7 @@ function App() {
                         <Guitar
                             key={guitar.id}
                             guitar={guitar}
-                            setCart={setCart}
+                            //setCart={setCart}
                             addToCart={addToCart}
                         />
                     )
