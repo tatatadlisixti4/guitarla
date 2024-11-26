@@ -8,6 +8,10 @@ function App() {
     const [data, setData] = useState([]);
     const [cart, setCart] = useState([]);
 
+    function addToCart(item) {
+        setCart(prevCart => [...prevCart, item])
+    }
+
     useEffect(() => {
         setData(db)
     }, [])
@@ -25,6 +29,7 @@ function App() {
                             key={guitar.id}
                             guitar={guitar}
                             setCart={setCart}
+                            addToCart={addToCart}
                         />
                     )
                 })}
