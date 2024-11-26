@@ -18,12 +18,14 @@ function App() {
             <h2 className="text-center">Nuestra Colección</h2>
 
             <div className="row mt-5">
-                {data.map(()=> {
+                {data.map(guitar => {
                     return (
-                        <Guitar />
+                        <Guitar
+                            key={guitar.id}
+                            price={guitar.price}
+                        />
                     )
                 })}
-
             </div>
         </main>
 
