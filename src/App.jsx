@@ -12,14 +12,16 @@ function App() {
         // Recorre sin inmutar el state
         const itemExist = cart.findIndex( guitar => guitar.id === item.id);
         if(itemExist >= 0)  {
+            // Copia del state para no mutarlo al modificar la cantidad de sus elementos
+            const updatedCart = [...cart];
+            updatedCart[itemExist].quantity ++;
+            setCart(updatedCart);
 
         } else {
             item.quantity = 1
             setCart([...cart, item])
 
         }
-
-
     }
 
     useEffect(() => {
