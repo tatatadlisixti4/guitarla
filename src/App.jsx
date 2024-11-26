@@ -11,8 +11,15 @@ function App() {
     function addToCart(item) {
         // Recorre sin inmutar el state
         const itemExist = cart.findIndex( guitar => guitar.id === item.id);
-        console.log(itemExist);
-        setCart(prevCart => [...prevCart, item])
+        if(itemExist >= 0)  {
+
+        } else {
+            item.quantity = 1
+            setCart([...cart, item])
+
+        }
+
+
     }
 
     useEffect(() => {
