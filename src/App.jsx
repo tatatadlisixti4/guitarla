@@ -1,7 +1,15 @@
+import {useState, useEffect} from "react";
 import Header from "./components/Header.jsx";
 import Guitar from "./components/Guitar.jsx";
+import {db}  from "./data/db.js";
+
 
 function App() {
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        setData(db)
+    }, [])
 
     return (
     <>
