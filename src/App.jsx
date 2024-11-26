@@ -9,6 +9,9 @@ function App() {
     const [cart, setCart] = useState([]);
 
     function addToCart(item) {
+        // Recorre sin inmutar el state
+        const itemExist = cart.findIndex( guitar => guitar.id === item.id);
+        console.log(itemExist);
         setCart(prevCart => [...prevCart, item])
     }
 
