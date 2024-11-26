@@ -6,6 +6,7 @@ import {db}  from "./data/db.js";
 
 function App() {
     const [data, setData] = useState([]);
+    const [cart, setCart] = useState([]);
 
     useEffect(() => {
         setData(db)
@@ -23,6 +24,7 @@ function App() {
                         <Guitar
                             key={guitar.id}
                             guitar={guitar}
+                            setCart={setCart}
                         />
                     )
                 })}

@@ -1,10 +1,6 @@
 // function Guitar(props), es similar al e que se pone en js para acceder al evento.
-function Guitar({guitar}){
+function Guitar({guitar, setCart}){
     const {id, name, image, description, price} = guitar;
-    const handleClick = ({id}) => {
-        console.log('Diste Click');
-        console.log(id)
-    }
 
     return (
         <div className="col-md-6 col-lg-4 my-4 row align-items-center">
@@ -18,7 +14,9 @@ function Guitar({guitar}){
                 <button
                     type="button"
                     className="btn btn-dark w-100"
-                    onClick={() => handleClick(guitar)}
+                    onClick={() => {
+                        setCart(prevCart => [...prevCart, guitar])
+                    }}
                 >Agregar al Carrito
                 </button>
             </div>
