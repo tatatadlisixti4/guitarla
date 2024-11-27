@@ -12,6 +12,10 @@ function App() {
         setData(db)
     }, [])
 
+    useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }, [cart]);
+
     // Constantes
     const MAX_ITEMS = 5;
     const MIN_ITEMS = 1;
