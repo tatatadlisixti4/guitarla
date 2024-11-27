@@ -5,14 +5,21 @@ import {db}  from "./data/db.js";
 
 
 function App() {
+    // Hooks
     const [data, setData] = useState([]);
     const [cart, setCart] = useState([]);
+    useEffect(() => {
+        setData(db)
+    }, [])
 
+    // Constantes
+    const MAX_ITEMS = 5;
+
+    // Funciones
     function addToCart(item) {
-        // Recorre sin inmutar el state
         const itemExist = cart.findIndex( guitar => guitar.id === item.id);
+
         if(itemExist >= 0)  {
-            // Copia del state para no mutarlo al modificar la cantidad de sus elementos
             const updatedCart = [...cart];
             updatedCart[itemExist].quantity ++;
             setCart(updatedCart);
@@ -26,15 +33,23 @@ function App() {
         setCart( prevCart => prevCart.filter( guitar => guitar.id !== id ) );
     }
 
-    useEffect(() => {
-        setData(db)
-    }, [])
+    function increaseQuantity(id) {
+        const updatedCart = cart.map(item => {
+            if(item.id === id && item.quantity < MAX_ITEMS) {
+                return {...item, quantity: item.quantity + 1}
+            }
+            return item
+        })
+        setCart(updatedCart);
+    }
 
+    // Returns
     return (
     <>
         <Header
             cart={cart}
             removeFromCart={removeFromCart}
+            increaseQuantity={increaseQuantity}
         />
         <main className="container-xl mt-5">
             <h2 className="text-center">Nuestra Colección</h2>
@@ -45,7 +60,6 @@ function App() {
                         <Guitar
                             key={guitar.id}
                             guitar={guitar}
-                            //setCart={setCart}
                             addToCart={addToCart}
                         />
                     )
