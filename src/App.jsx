@@ -14,6 +14,7 @@ function App() {
 
     // Constantes
     const MAX_ITEMS = 5;
+    const MIN_ITEMS = 1;
 
     // Funciones
     function addToCart(item) {
@@ -43,6 +44,16 @@ function App() {
         setCart(updatedCart);
     }
 
+    function decreaseQuantity(id) {
+        const updatedCart = cart.map(item => {
+            if(item.id === id && item.quantity > MIN_ITEMS) {
+                return {...item, quantity: item.quantity - 1}
+            }
+            return item
+        })
+        setCart(updatedCart)
+    }
+
     // Returns
     return (
     <>
@@ -50,6 +61,7 @@ function App() {
             cart={cart}
             removeFromCart={removeFromCart}
             increaseQuantity={increaseQuantity}
+            decreaseQuantity={decreaseQuantity}
         />
         <main className="container-xl mt-5">
             <h2 className="text-center">Nuestra Colección</h2>
