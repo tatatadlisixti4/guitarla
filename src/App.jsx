@@ -5,9 +5,18 @@ import {db}  from "./data/db.js";
 
 
 function App() {
+    // Constantes
+    const MAX_ITEMS = 5;
+    const MIN_ITEMS = 1;
+    const initialCart = () => {
+        const localStorageCart = localStorage.getItem('cart');
+        return localStorageCart ? JSON.parse(localStorageCart) : [];
+    }
+
     // Hooks
     const [data, setData] = useState([]);
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState(initialCart);
+
     useEffect(() => {
         setData(db)
     }, [])
@@ -15,10 +24,6 @@ function App() {
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cart));
     }, [cart]);
-
-    // Constantes
-    const MAX_ITEMS = 5;
-    const MIN_ITEMS = 1;
 
     // Funciones
     function addToCart(item) {
